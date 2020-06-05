@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include "StrBlob.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -12,6 +11,7 @@
 #include <vector>
 
 class QueryResult;
+class StrVec;
 
 class TextQuery
 {
@@ -21,6 +21,6 @@ public:
     QueryResult query(const std::string&);
 
 private:
-    StrBlob input_text;
+    std::shared_ptr<StrVec> input_text;
     std::map<std::string, std::shared_ptr<std::pair<size_t, std::set<TextQuery::LineNo>>>> result;
 };

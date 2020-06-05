@@ -152,6 +152,7 @@
     <ClCompile Include="QueryResult.cpp" />
     <ClCompile Include="StrBlob.cpp" />
     <ClCompile Include="StrBlobPtr.cpp" />
+    <ClCompile Include="StrVec.cpp" />
     <ClCompile Include="Text Query.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="QueryResult.h" />
     <ClInclude Include="StrBlob.h" />
     <ClInclude Include="StrBlobPtr.h" />
+    <ClInclude Include="StrVec.h" />
     <ClInclude Include="TextQuery.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

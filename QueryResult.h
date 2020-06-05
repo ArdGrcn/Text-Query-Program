@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include "StrBlob.h"
 #include <iostream>
 #include <memory>
 #include <set>
@@ -9,6 +8,7 @@
 #include <vector>
 
 class TextQuery;
+class StrVec;
 
 class QueryResult
 {
@@ -20,15 +20,15 @@ public:
     QueryResult(
         const std::string& s,
         std::shared_ptr<std::pair<size_t, std::set<LineNo>>> pair,
-        StrBlob b
+        std::shared_ptr<StrVec> b
     ) : query_name(s), nos(pair), input_text(b) { }
 
     std::set<LineNo>::iterator begin();
     std::set<LineNo>::iterator end();
-    std::shared_ptr<StrBlob> get_file();
+    std::shared_ptr<StrVec> get_file();
 
 private:
     std::string query_name;
     std::shared_ptr<std::pair<size_t, std::set<LineNo>>> nos;
-    StrBlob input_text;
+    std::shared_ptr<StrVec> input_text;
 };
