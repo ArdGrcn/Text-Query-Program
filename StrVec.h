@@ -12,7 +12,9 @@ public:
     StrVec() : elements(nullptr), first_free(nullptr), cap(nullptr) { }
     StrVec(std::initializer_list<std::string>);
     StrVec(const StrVec&);
+    StrVec(StrVec&&) noexcept;
     StrVec& operator=(const StrVec&);
+    StrVec& operator=(StrVec&&) noexcept;
     ~StrVec();
 
     void push_back(const std::string&);

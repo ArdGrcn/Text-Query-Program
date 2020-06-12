@@ -15,6 +15,11 @@ StrVec::StrVec(const StrVec &s)
     first_free = cap = newdata.second;
 }
 
+StrVec::StrVec(StrVec&& s) noexcept : elements(s.elements), first_free(s.first_free), cap(s.cap)
+{
+    s.elements = s.first_free = s.cap = nullptr;
+}
+
 StrVec &StrVec::operator=(const StrVec &rhs)
 {
     // call alloc_n_copy to allocate exactly as many elements as in rhs
@@ -22,6 +27,20 @@ StrVec &StrVec::operator=(const StrVec &rhs)
     free();
     elements = data.first;
     first_free = cap = data.second;
+    return *this;
+}
+
+StrVec& StrVec::operator=(StrVec &&rhs) noexcept
+{
+    if (this != &rhs)
+    {
+        free();
+        elements = rhs.elements;
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
     return *this;
 }
 
