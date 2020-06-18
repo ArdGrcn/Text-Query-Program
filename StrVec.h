@@ -15,6 +15,9 @@ public:
     StrVec(StrVec&&) noexcept;
     StrVec& operator=(const StrVec&);
     StrVec& operator=(StrVec&&) noexcept;
+    StrVec& operator=(std::initializer_list<std::string>);
+    std::string& operator[](std::size_t);
+    const std::string& operator[](std::size_t) const;
     ~StrVec();
 
     void push_back(const std::string&);

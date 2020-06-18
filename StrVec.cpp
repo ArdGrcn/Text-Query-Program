@@ -44,7 +44,30 @@ StrVec& StrVec::operator=(StrVec &&rhs) noexcept
     return *this;
 }
 
-StrVec::~StrVec() { free(); }
+StrVec& StrVec::operator=(std::initializer_list<std::string> il)
+{
+    // alloc_n_copy allocates space and copies elements from the given range
+    auto data = alloc_n_copy(il.begin(), il.end());
+    free(); // destroy the elements in this object and free the space
+    elements = data.first; // update data members to point to the new space
+    first_free = cap = data.second;
+    return *this;
+}
+
+StrVec::~StrVec()
+{
+    free();
+}
+
+std::string& StrVec::operator[](std::size_t n)
+{
+    return elements[n];
+}
+
+const std::string& StrVec::operator[](std::size_t n) const
+{
+    return elements[n];
+}
 
 void StrVec::reallocate()
 {
