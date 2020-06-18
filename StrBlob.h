@@ -13,6 +13,8 @@ class StrBlob
 {
     friend StrBlobPtr;
     friend ConstStrBlobPtr;
+    friend bool operator==(const StrBlob&, const StrBlob&);
+    friend bool operator!=(const StrBlob&, const StrBlob&);
 
 public:
     typedef std::vector<std::string>::size_type size_type;
@@ -40,3 +42,6 @@ private:
     std::shared_ptr<std::vector<std::string>> data;
     void check(size_type i, const std::string& msg) const;
 };
+
+bool operator==(const StrBlob&, const StrBlob&);
+bool operator!=(const StrBlob&, const StrBlob&)

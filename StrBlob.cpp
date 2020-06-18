@@ -8,6 +8,16 @@ StrBlob& StrBlob::operator=(const StrBlob& rhs)
     return *this;
 }
 
+bool operator==(const StrBlob &lhs, const StrBlob &rhs)
+{
+    return lhs.data == rhs.data;
+}
+
+bool operator!=(const StrBlob &lhs, const StrBlob &rhs)
+{
+    return !(lhs == rhs);
+}
+
 void StrBlob::check(size_type i, const std::string& msg) const
 {
     if (i >= data->size())

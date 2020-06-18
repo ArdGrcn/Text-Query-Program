@@ -2,7 +2,15 @@
 #include "StrBlobPtr.h"
 
 
-StrBlobPtr::StrBlobPtr(StrBlob& a, size_t sz) : wptr(a.data), curr(sz) { }
+bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs)
+{
+    return lhs.wptr.lock == rhs.wptr.lock && lhs.curr == rhs.curr;
+}
+
+bool operator!=(const StrBlobPtr &lhs, const StrBlobPtr &rhs)
+{
+    return !(lhs == rhs);
+}
 
 std::shared_ptr<std::vector<std::string>> StrBlobPtr::check(std::size_t i, const std::string& msg) const
 {
