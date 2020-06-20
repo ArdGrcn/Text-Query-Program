@@ -1,8 +1,8 @@
-#include "StrBlob.h"
 #include "ConstStrBlobPtr.h"
+#include "StrBlob.h"
 
 
-ConstStrBlobPtr::ConstStrBlobPtr(const StrBlob& a, size_t sz) : wptr(a.data), curr(sz) {}
+ConstStrBlobPtr::ConstStrBlobPtr(const StrBlob& a, size_t sz) : wptr(a.data), curr(sz) { }
 
 const std::shared_ptr<const std::vector<std::string>> ConstStrBlobPtr::check(std::size_t i, const std::string& msg) const
 {

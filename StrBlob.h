@@ -44,4 +44,4 @@ private:
 };
 
 bool operator==(const StrBlob&, const StrBlob&);
-bool operator!=(const StrBlob&, const StrBlob&)
+bool operator!=(const StrBlob&, const StrBlob&);

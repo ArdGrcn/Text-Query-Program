@@ -12,7 +12,7 @@ class ConstStrBlobPtr
 {
 public:
     ConstStrBlobPtr() : curr(0) {}
-    ConstStrBlobPtr(const StrBlob& a, size_t sz = 0);
+    ConstStrBlobPtr(const StrBlob&, size_t = 0);
     const std::string& deref() const;
     ConstStrBlobPtr& incr();
     bool equal(const ConstStrBlobPtr& rhs) const { return this->curr == rhs.curr; }

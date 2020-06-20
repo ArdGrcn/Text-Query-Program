@@ -15,10 +15,18 @@ class StrBlobPtr
 
 public:
     StrBlobPtr() : curr(0) {}
-    StrBlobPtr(StrBlob& a, size_t sz) : wptr(a.data), curr(sz) { }
+    StrBlobPtr(StrBlob&, size_t = 0);
     std::string& deref() const;
     StrBlobPtr& incr();
     bool equal(StrBlobPtr& rhs) const { return this->curr == rhs.curr; }
+    StrBlobPtr& operator++(); // pre-fix operators
+    StrBlobPtr& operator--();
+    StrBlobPtr& operator++(int); // post-fix operators
+    StrBlobPtr& operator--(int);
+    StrBlobPtr operator+(const int) const;
+    StrBlobPtr operator-(const int) const;
+    StrBlobPtr& operator+=(const int);
+    StrBlobPtr& operator-=(const int);
 
 private:
     std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string&) const;
