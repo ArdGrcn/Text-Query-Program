@@ -31,7 +31,7 @@ std::shared_ptr<std::vector<std::string>> StrBlobPtr::check(std::size_t i, const
 
 std::string& StrBlobPtr::deref() const
 {
-    auto p = check(curr, "Dereference past end.");
+    auto p = check(curr, "Dereferencing past end.");
     return (*p)[curr];
 }
 
@@ -96,4 +96,15 @@ StrBlobPtr& StrBlobPtr::operator-=(const int rhs)
     curr -= rhs;
     check(curr, "Decrementing before begin of StrBlobPtr.");
     return *this;
+}
+
+std::string& StrBlobPtr::operator*() const
+{
+    auto p = check(curr, "Dereferencing past end.");
+    return (*p)[curr];
+}
+
+std::string* StrBlobPtr::operator->() const
+{
+    return & this->operator*();
 }
