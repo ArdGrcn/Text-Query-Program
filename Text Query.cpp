@@ -1,16 +1,18 @@
 #include "TextQuery.h"
 #include "QueryResult.h"
 #include "StrVec.h"
+#include <algorithm>
+#include <sstream>
 
-QueryResult TextQuery::query(const std::string& word_to_query)
+QueryResult TextQuery::query(const std::string& word_to_query) const
 {
-    static std::shared_ptr<std::pair<WordCount, std::set<LineNo>>> noData(
-        new std::pair<WordCount, std::set<LineNo>>);
+    static std::shared_ptr<std::set<size_t>> noData(
+        new std::set<size_t>);
 
     auto found = result.find(word_to_query);
     if (found == result.cend())
     {
-        std::cout << "Word not found.\n";
+        std::cout << word_to_query + " not found.\n";
         return QueryResult(word_to_query, noData, input_text);
     }
 
@@ -20,7 +22,7 @@ QueryResult TextQuery::query(const std::string& word_to_query)
 
 TextQuery::TextQuery(std::ifstream& infile) : input_text(std::make_shared<StrVec>())
 {
-    LineNo lineNo = 1;
+    size_t lineNo = 1;
     for (std::string line; std::getline(infile, line); ++lineNo)
     {
         input_text->push_back(line);
@@ -32,9 +34,8 @@ TextQuery::TextQuery(std::ifstream& infile) : input_text(std::make_shared<StrVec
             // use reference avoid count of shared_ptr add.
             auto& result_ref = result[word];
             if (!result_ref)
-                result_ref.reset(new std::pair<WordCount, std::set<TextQuery::LineNo>>);
-            ++result_ref->first;
-            result_ref->second.insert(lineNo);
+                result_ref.reset(new std::set<size_t>);
+            result_ref->insert(lineNo);
         }
     }
 }
