@@ -2,7 +2,7 @@
 #include "Query.h"
 #include "QueryResult.h"
 #include "TextQuery.h"
-#include "StrVec.h"
+#include "Vec.h"
 
 
 NotQuery::NotQuery(std::shared_ptr<QueryBase> q) : query(q) { }

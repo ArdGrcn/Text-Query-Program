@@ -1,26 +1,67 @@
-#include "StrVec.h"
+#pragma once
+
+#include <algorithm>
+#include <memory>
+#include <string>
+#include <utility>
 
 
-StrVec::StrVec(std::initializer_list<std::string> sl)
+template <typename T> class Vec
+{
+public:
+    Vec() : elements(nullptr), first_free(nullptr), cap(nullptr) { }
+    Vec(std::initializer_list<T>);
+    Vec(const Vec&);
+    Vec(Vec&&) noexcept;
+    Vec& operator=(const Vec&);
+    Vec& operator=(Vec&&) noexcept;
+    Vec& operator=(std::initializer_list<T>);
+    T& operator[](std::size_t);
+    const T& operator[](std::size_t) const;
+    ~Vec();
+
+    void push_back(const T&);
+    void push_back(T&&);
+    size_t size() const { return first_free - elements; }
+    size_t capacity() const { return cap - elements; }
+    void reserve(size_t);
+    void resize(size_t);
+    T* begin() const { return elements; }
+    T* end() const { return first_free; }
+
+private:
+    std::allocator<T> alloc;
+
+    void check_n_alloc() { if (size() == capacity()) reallocate(); }
+    std::pair<T*, T*> alloc_n_copy(const T*, const T*);
+    void free();
+    void reallocate();
+
+    T *elements;
+    T *first_free;
+    T *cap;
+};
+
+template <typename T> Vec<T>::Vec(std::initializer_list<T> sl)
 {
     auto data = alloc_n_copy(sl.begin(), sl.end());
     elements = data.first;
     first_free = cap = data.second;
 }
 
-StrVec::StrVec(const StrVec &s)
+template <typename T> Vec<T>::Vec(const Vec& s)
 {
     auto newdata = alloc_n_copy(s.begin(), s.end());
     elements = newdata.first;
     first_free = cap = newdata.second;
 }
 
-StrVec::StrVec(StrVec&& s) noexcept : elements(s.elements), first_free(s.first_free), cap(s.cap)
+template <typename T> Vec<T>::Vec(Vec&& s) noexcept : elements(s.elements), first_free(s.first_free), cap(s.cap)
 {
     s.elements = s.first_free = s.cap = nullptr;
 }
 
-StrVec &StrVec::operator=(const StrVec &rhs)
+template <typename T> Vec<T>& Vec<T>::operator=(const Vec& rhs)
 {
     // call alloc_n_copy to allocate exactly as many elements as in rhs
     auto data = alloc_n_copy(rhs.begin(), rhs.end());
@@ -30,7 +71,7 @@ StrVec &StrVec::operator=(const StrVec &rhs)
     return *this;
 }
 
-StrVec& StrVec::operator=(StrVec &&rhs) noexcept
+template <typename T> Vec<T>& Vec<T>::operator=(Vec&& rhs) noexcept
 {
     if (this != &rhs)
     {
@@ -44,7 +85,7 @@ StrVec& StrVec::operator=(StrVec &&rhs) noexcept
     return *this;
 }
 
-StrVec& StrVec::operator=(std::initializer_list<std::string> il)
+template <typename T> Vec<T>& Vec<T>::operator=(std::initializer_list<T> il)
 {
     // alloc_n_copy allocates space and copies elements from the given range
     auto data = alloc_n_copy(il.begin(), il.end());
@@ -54,34 +95,34 @@ StrVec& StrVec::operator=(std::initializer_list<std::string> il)
     return *this;
 }
 
-StrVec::~StrVec()
+template <typename T> Vec<T>::~Vec()
 {
     free();
 }
 
-std::string& StrVec::operator[](std::size_t n)
+template <typename T> T& Vec<T>::operator[](std::size_t n)
 {
     return elements[n];
 }
 
-const std::string& StrVec::operator[](std::size_t n) const
+template <typename T> const T& Vec<T>::operator[](std::size_t n) const
 {
     return elements[n];
 }
 
-void StrVec::reallocate()
+template <typename T> void Vec<T>::reallocate()
 {
     auto newcapacity = size() ? 2 * size() : 1;
     reserve(newcapacity);
 }
 
-void StrVec::reserve(size_t n)
+template <typename T> void Vec<T>::reserve(size_t n)
 {
     if (n <= capacity())
     {
         return;
     }
-    
+
     auto newdata = alloc.allocate(n);
 
     auto dest = newdata;
@@ -91,14 +132,14 @@ void StrVec::reserve(size_t n)
     {
         alloc.construct(dest++, std::move(*elem++));
     }
-    
+
     free();
     elements = newdata;
     first_free = dest;
     cap = elements + n;
 }
 
-void StrVec::resize(size_t n)
+template <typename T> void Vec<T>::resize(size_t n)
 {
     if (size() < n)
     {
@@ -119,30 +160,30 @@ void StrVec::resize(size_t n)
     }
 }
 
-void StrVec::push_back(const std::string &s)
+template <typename T> void Vec<T>::push_back(const T& s)
 {
     check_n_alloc();
     alloc.construct(first_free++, s);
 }
 
-void StrVec::push_back(std::string &&s)
+template <typename T> void Vec<T>::push_back(T&& s)
 {
     check_n_alloc();
     alloc.construct(first_free++, std::move(s));
 }
 
-std::pair<std::string*, std::string*> StrVec::alloc_n_copy(const std::string *b, const std::string *e)
+template <typename T> std::pair<T*, T*> Vec<T>::alloc_n_copy(const T* b, const T* e)
 {
     auto data = alloc.allocate(e - b);
 
-    return {data, std::uninitialized_copy(b, e, data)};
+    return { data, std::uninitialized_copy(b, e, data) };
 }
 
-void StrVec::free()
+template <typename T> void Vec<T>::free()
 {
     if (elements)
     {
-        std::for_each(elements, first_free, [this] (std::string &p) { alloc.destroy(&p); });
+        std::for_each(elements, first_free, [this](std::string& p) { alloc.destroy(&p); });
         alloc.deallocate(elements, cap - elements);
     }
 }

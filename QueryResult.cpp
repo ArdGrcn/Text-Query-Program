@@ -1,5 +1,5 @@
 #include "QueryResult.h"
-#include "StrVec.h"
+#include "Vec.h"
 
 std::ostream& print(std::ostream& os, QueryResult result)
 {
@@ -21,7 +21,7 @@ std::set<size_t>::iterator QueryResult::end()
     return lines->end();
 }
 
-std::shared_ptr<StrVec> QueryResult::get_file()
+std::shared_ptr<Vec<std::string>> QueryResult::get_file()
 {
     return input_text;
 }

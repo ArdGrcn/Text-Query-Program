@@ -24,18 +24,6 @@
     <ClCompile Include="QueryResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StrBlob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StrBlobPtr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstStrBlobPtr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StrVec.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Query.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,24 +42,24 @@
     <ClCompile Include="OrQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Blob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstBlobPtr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlobPtr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StrBlob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StrBlobPtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstStrBlobPtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StrVec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryBase.h">
@@ -93,6 +81,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OrQuery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Blob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstBlobPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlobPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

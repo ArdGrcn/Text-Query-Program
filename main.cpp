@@ -1,6 +1,9 @@
 #include "TextQuery.h"
 #include "QueryResult.h"
 #include "Query.h"
+#include "Blob.h"
+#include "BlobPtr.h"
+#include <string>
 
 int main()
 {
@@ -12,4 +15,7 @@ int main()
         auto qr = q.evaluate(tq);
         print(std::cout, qr);
     }
+
+    Blob<std::string> b;
+    BlobPtr<std::string> ptr = b;
 }

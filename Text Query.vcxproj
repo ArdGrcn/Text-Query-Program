@@ -149,30 +149,30 @@
   <ItemGroup>
     <ClCompile Include="AndQuery.cpp" />
     <ClCompile Include="BinaryQuery.cpp" />
-    <ClCompile Include="ConstStrBlobPtr.cpp" />
+    <ClCompile Include="ConstBlobPtr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NotQuery.cpp" />
     <ClCompile Include="OrQuery.cpp" />
     <ClCompile Include="Query.cpp" />
     <ClCompile Include="QueryResult.cpp" />
-    <ClCompile Include="StrBlob.cpp" />
-    <ClCompile Include="StrBlobPtr.cpp" />
-    <ClCompile Include="StrVec.cpp" />
+    <ClCompile Include="Blob.cpp" />
+    <ClCompile Include="BlobPtr.cpp" />
+    <ClCompile Include="Vec.cpp" />
     <ClCompile Include="Text Query.cpp" />
     <ClCompile Include="WordQuery.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AndQuery.h" />
     <ClInclude Include="BinaryQuery.h" />
-    <ClInclude Include="ConstStrBlobPtr.h" />
+    <ClInclude Include="ConstBlobPtr.h" />
     <ClInclude Include="NotQuery.h" />
     <ClInclude Include="OrQuery.h" />
     <ClInclude Include="Query.h" />
     <ClInclude Include="QueryBase.h" />
     <ClInclude Include="QueryResult.h" />
-    <ClInclude Include="StrBlob.h" />
-    <ClInclude Include="StrBlobPtr.h" />
-    <ClInclude Include="StrVec.h" />
+    <ClInclude Include="Blob.h" />
+    <ClInclude Include="BlobPtr.h" />
+    <ClInclude Include="Vec.h" />
     <ClInclude Include="TextQuery.h" />
     <ClInclude Include="WordQuery.h" />
   </ItemGroup>

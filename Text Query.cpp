@@ -1,6 +1,6 @@
 #include "TextQuery.h"
 #include "QueryResult.h"
-#include "StrVec.h"
+#include "Vec.h"
 #include <algorithm>
 #include <sstream>
 
@@ -20,7 +20,7 @@ QueryResult TextQuery::query(const std::string& word_to_query) const
 }
 
 
-TextQuery::TextQuery(std::ifstream& infile) : input_text(std::make_shared<StrVec>())
+TextQuery::TextQuery(std::ifstream& infile) : input_text(std::make_shared<Vec<std::string>>())
 {
     size_t lineNo = 1;
     for (std::string line; std::getline(infile, line); ++lineNo)
